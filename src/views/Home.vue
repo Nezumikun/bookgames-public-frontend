@@ -24,24 +24,35 @@
       v-if="!loading && complitedGames.length > 0"
       class="mt-4"
     )
-      h3 Завершённые игры
-      b-list-group
-        b-list-group-item(
+      h3 Прошедшие игры
+      b-row
+        b-col(
+          sm="12"
+          md="6"
           v-for="item in complitedGames"
           :key="item.id"
-          :to="'/game/'+item.id"
-          class="p-0"
         )
-          b-button-group(class="d-flex")
-            b-button(:to="'/game/'+item.id" variant="light" class="w-100 text-left") {{ item.title }}
-            b-button(:to="'/game/'+item.id+'/logs'" variant="primary") Ход&nbsp;игры
-            b-button(:to="'/game/'+item.id+'/result'" variant="success") Таблица
+          b-card(
+            :to="'/game/'+item.id"
+            class="my-3"
+          )
+            b-card-body
+              b-card-title {{ item.title }}
+
+              b-button-group
+                b-button(:to="'/game/'+item.id+'/logs'" variant="primary")
+                  b-icon-receipt
+                  span(class="pl-1") Ход игры
+                b-button(:to="'/game/'+item.id+'/result'" variant="success")
+                  b-icon-table
+                  span(class="pl-1") Таблица
 </template>
 
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
 import apiCall from '../tools/axios'
+import { BIcon, BIconTable, BIconReceipt } from 'bootstrap-vue'
 
 export default {
   data () {
@@ -64,6 +75,10 @@ export default {
     this.loading = false
   },
   name: 'home',
-  components: {}
+  components: {
+    BIcon,
+    BIconTable,
+    BIconReceipt
+  }
 }
 </script>
