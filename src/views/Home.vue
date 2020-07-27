@@ -41,7 +41,7 @@
 
               b-card-text(class="mt-2")
                 div Начата: {{ formatTime(item.activatedTime) }}
-                div Закончена: {{ formatTime(item.finishTime) }}
+                div(v-if='item.finishTime') Закончена: {{ formatTime(item.finishTime) }}
                 div Вопросов: {{ item.countQuestion }}
                 div Участников: {{ item.countTeam }}
 
