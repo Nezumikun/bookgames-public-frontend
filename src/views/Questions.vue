@@ -24,7 +24,10 @@
         :key="question.id"
         class="my-3"
       ) {{ question.number }}. {{ question.text }}
-        div(class="font-weight-bold") {{ question.author }} &laquo;{{ question.bookTitle }}&raquo;
+        div(
+          class="font-weight-bold"
+          v-if="question.bookTitle.length > 0"
+        ) {{ question.author }} &laquo;{{ question.bookTitle }}&raquo;
           span(v-if="question.bookDetail.length > 0")  ({{ question.bookDetail }})
           span(v-if="question.word.length > 0") , {{ question.word }}
         div(

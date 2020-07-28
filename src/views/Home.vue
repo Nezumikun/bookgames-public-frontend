@@ -13,13 +13,36 @@
       v-if="!loading && activeGames.length > 0"
       class="mt-4"
     )
-      h3 Текущие игры
-      b-list-group
-        b-list-group-item(
+      h3 Активные игры
+      b-row
+        b-col(
+          sm="12"
+          md="6"
           v-for="item in activeGames"
           :key="item.id"
         )
-          span {{ item.title }}
+          b-card(
+            class="my-3"
+          )
+            b-card-body(class="m-0 p-0")
+              b-card-title {{ item.title }}
+              b-card-sub-title {{ item.subtitle }}
+
+              b-card-text(class="mt-2")
+                div Начата: {{ formatTime(item.activatedTime) }}
+                div(v-if='item.finishTime') Завершится: {{ formatTime(item.finishTime) }}
+                div Вопросов: {{ item.countQuestion }}
+                div Участников: {{ item.countTeam }}
+
+              b-button(:to="'/game/'+item.id" variant="link" class="pl-0 pr-4")
+                b-icon-question-square
+                span(class="pl-1") Вопросы
+              b-button(:to="'/game/'+item.id+'/logs'" variant="link" class="pl-0 pr-4")
+                b-icon-receipt
+                span(class="pl-1") Ход игры
+              b-button(:to="'/game/'+item.id+'/result'" variant="link" class="pl-0 pr-4")
+                b-icon-table
+                span(class="pl-1") Результаты
     div(
       v-if="!loading && complitedGames.length > 0"
       class="mt-4"
